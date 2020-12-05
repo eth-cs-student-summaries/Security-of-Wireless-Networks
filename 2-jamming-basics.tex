@@ -24,6 +24,14 @@ A ratio $\geq 0$ usually results in successful jamming.
 \paragraph{Burn-through range}
 Range in which communication still succeeds, despite jamming.
 
+\paragraph{Attacker model} \mbox{} \\
+% taken from the following chapter/deck of slides
+Types: responsive, sweep, random \\
+Actions: jam, insert, modify (= overshadow) \\
+Power to jam/insert/modify: $P_j, P_t, P_o$ \\
+\# channels to jam/insert/modify: $c_j, c_t, c_o$ \\
+Total strength/power $P_T$ \\
+$$ c_j P_j + c_t P_t + c_o P_o \leq P_T$$
 
 \subsection{Jamming Resistant Communication}
 
@@ -92,3 +100,7 @@ Ratio of the spread bandwidth to the baseband bandwidth, in dB.
 \paragraph{Chirp Signal / Sweep Signal}
 Signal in which the frequency increases and decreases over time (``sweeping'' over a bandwidth much wider than the baseband bandwidth).
 Narrowband and partial-band jamming are prevented, follower jamming not so much
+
+\paragraph{Code-Division Multiple Access CDMA}
+Multiple transmitters sending in the same area simultaneously, but using different spreading codes.
+Allows sharing of the same frequencies/bandwidth without interference.
