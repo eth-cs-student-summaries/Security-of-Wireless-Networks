@@ -25,7 +25,7 @@ Note that often the bandwidth of the baseband and that of the carrier (and thus 
 E.g. see spread spectrum techniques.
 % TODO link to section
 
-\begin{figure}%[b]
+\begin{figure}
 	\centering
 	\includegraphics[scale=0.35]{images/1-wifi-channels.png}
 	\caption{2.4 GHz WiFi Channels \href{https://en.wikipedia.org/wiki/List\_of\_WLAN\_channels\#/media/File:2.4\_GHz\_Wi-Fi\_channels\_(802.11b,g_WLAN).svg}{[Source]}}
@@ -34,12 +34,13 @@ E.g. see spread spectrum techniques.
 
 \paragraph{Baseband}
 An original transmission signal that has not been modulated or has been demodulated to its original frequency.
-I.e. the actual ``information signal''.
+I.e. the actual \textbf{information signal}.
 Most telecommunication protocols require baseband signals to be converted, or modulated, to a higher frequency in order to be transmitted over long distances.
 
 \paragraph{Carrier}
 A transmitted electromagnetic pulse or wave at a steady base frequency of alternation on which information can be imposed.
 Typically a pure sinusoid of a particular frequency and phase that carries the information.
+Usually the frequency of the carrier is much higher than that of the baseband.
 
 \paragraph{Modulated Signal}
 A carrier that has been loaded or modulated with the information signal.
@@ -126,6 +127,11 @@ Depends not just on the antenna gain, but also on other factors such as the nois
 \end{itemize}
 Calculating a value in dB:
 $$ dB(n) = 10 \log_{10} (n) \quad \text{ and } \quad dBm(n) = 10 \log_{10} (n / 1 mW) $$
+
+\paragraph{Power Spectral Density diagram}
+Depicts the power density (in dB) for a range of frequencies.
+In simple terms, it shows how strong the signal is at a given frequency.
+
 
 \paragraph{Security Goals}
 Reasons: \textit{security} (integrity, confidentiality, authentication), \textit{regulatory} (personal liability for misuse of one's network access), \textit{safety} (RF-enabled implants).
