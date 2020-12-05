@@ -50,11 +50,12 @@ Possible attacks:
 \paragraph{Direct Sequence Spread Spectrum DSSS}
 Spreads the baseband over a larger bandwidth using a shared secret (narrowband to broadband). \\
 Since the transmission power remains the same, the power density at any given frequency decreases.
-Thus the spread signal can effectively ``hide under the noise''.
+Thus the spread signal can effectively ``hide under the noise'' (\autoref{fig:dsss-psd}).
 
 To spread over more frequencies, we need a higher symbol/bit rate.
 To achieve this the information signal is multiplied with a high-frequency pseudorandom sequence called \textbf{chips} or \textbf{spreading code}.
 The result resembles \textbf{white noise}.
+See \autoref{fig:dsss}.
 
 During de-spreading, the signal is again multiplied with the same spreading code.
 De-spreading thus converts the wideband signal into a narrowband one (this works due to the autocorrelation properties of the spreading code).
@@ -69,6 +70,13 @@ Interception and modification is hard.
 Example usages: GPS, 802.11b WiFi, CDMA (used in 3G).
 Non-military applications mainly use DSSS for interference-resistance and use public spreading codes.
 They are thus still vulnerable to malicious jamming as DoS.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.4]{images/2-dsss-psd.jpg}
+	\caption{DSSS -- hiding under the noise}
+	\label{fig:dsss-psd}
+\end{figure}
 
 \begin{figure}
 	\centering
