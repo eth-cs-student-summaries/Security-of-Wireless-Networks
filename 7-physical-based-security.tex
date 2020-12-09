@@ -126,9 +126,7 @@ Here, we are fooling the receiver to believe that there is \underline{no} signal
 \end{itemize}
 
 
-\subsection{Broadcast Authentication: Integrity Codes}
-
-Physical layer-based broadcast authentication scheme based on presence awareness.
+\subsection{Broadcast Authentication: Presence Awareness}
 
 \paragraph{Scenario}
 One broadcasting station, many receivers.
@@ -138,10 +136,11 @@ Receivers know that they are within the power range of the legitimate sender
 Receivers know which channel (frequency) the sender is broadcasting.
 The sender is always on and transmitting.
 
-Goal: distinguish between broadcast messages of legitimate and malicious station.
-% TODO See also other chapter.
+\underline{Goal}: distinguish between broadcast messages of legitimate and malicious station.
+In other words, a physical layer-based broadcast authentication scheme based on presence awareness.
+See also \autoref{sec:broadcast-auth}.
 
-\paragraph{Protocol} \mbox{}\\
+\paragraph{Integrity Codes Protocol} \mbox{}\\
 \underline{Sender:}
 Spread message $m$ from $k$ to $2k$ bits using Manchester encoding (1 $\rightarrow$ 10, 0 $\rightarrow$ 01).
 Transmit result using on-off keying.
