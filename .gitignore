@@ -7,3 +7,6 @@
 *.out
 *.synctex.gz
 *.toc
+
+# Other
+.directory
