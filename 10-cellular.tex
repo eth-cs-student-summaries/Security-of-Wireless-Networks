@@ -192,7 +192,7 @@ By overwriting the service control function address an attacker can MITM a voice
 
 \paragraph{SS7 Summary}
 Legacy system with outdated trust model.
-Bad network management (no authentication or access control to control messages).
+Bad network management (open interfaces, no authentication or access control to control messages).
 Attacks are independent of cryptography and the radio link (i.e. work from far away).
 \\
 Some issues were fixed, and LTE has a new signalling system (Diameter).
@@ -215,7 +215,7 @@ Similar design principles like GSM: operator and SIM trusted, phone and visited 
 \underline{Remarks:} (see \autoref{fig:3g-aka-details})
 \begin{enumerate}
 	\item Both the SIM card and the operator maintain the sequence number SQN (against replays)
-	\item The IMSI is send before the authentication (enabling tracking, see later)
+	\item The IMSI\footnote{International Mobile Subscriber Identity} is send before the authentication (enabling tracking, see later)
 	\item Function $f_1, f_2, f_3, f_4, f_5$ are operator-specific
 	\item Loose synchronisation required
 	\item Integrity key IK for integrity protection
@@ -293,6 +293,179 @@ Thus user tracking is possible to some extent, but not addressed by the spec (tr
 
 \subsection{4G}
 
+\paragraph{Overview}
+\textit{Long-Term Evolution LTE} introduced in 2008.
+\\
+\underline{Updated architecture:}
+fully packet switched, new core network (\textit{Evolved Packet Core EPC}, fully packet-switched), new radio network (\textit{Evolved UMTS Terrestrial Radio Access Network E-UTRAN}), but interoperable with legacy systems.
+\\
+\underline{Updated physical layer:}
+\textit{Orthogonal Frequency Division Multiplexing OFDM} (downlink with orthogonal sub-carriers, single-carrier uplink), multiple antennas (MIMO).
+
+\paragraph{Architecture and Terminology}
+See \autoref{fig:4g-arch}.
+\begin{itemize}
+	\item \textit{User Equipment UE} (MS): the mobile handset
+	\item \textit{Evolved Node B eNB} (BS): the base station
+	\item \textit{Mobility Management Entity MME}: handles signalling via the \textit{Non-access stratum NAS}, UE authorisation, S-GW selection
+	\item \textit{Home Subscriber Server HSS} (HLR): subscriber database, user authentication
+	\item \textit{Serving Gateway S-GW}:  routes user data packets
+	\item \textit{Packet Gateway P-GW}: connects to external network, routing, filtering
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{images/10-4g-arch.png}
+	\caption{LTE Architecture}
+	\label{fig:4g-arch}
+\end{figure}
+
+\paragraph{Network Protocol Stack}
+See \autoref{fig:4g-network-stack}. From top to bottom:
+\begin{itemize}
+	\item \textit{Non-access stratum NAS}: mobility management, tracking area update, etc
+	\item \textit{Radio Resource Control RRC}: AKA, paging messages, system information broadcast, etc.
+	\item \textit{Packet Data Convergence Protocol PDCP}: compression, optionally encryption+integrity
+	\item \textit{Radio Link Control RLC}: error correction, segmentation, frame ordering
+	\item \textit{MAC layer}: manages access to radio link
+\end{itemize}
+Note that everything below the PDCP layer is unencrypted.
+Thus most sniffing+spoofing attacks focus on the layers below.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{images/10-4g-network-stack.png}
+	\caption{LTE Network Protocol Stack}
+	\label{fig:4g-network-stack}
+\end{figure}
+
+\paragraph{Security Overview}
+Authentication: similar to AKA.
+
+Encryption/integrity: 3 variants EEA1, EEA2, EEA3 and EIA1, EIA2, EIA3.
+
+Other: extended key hierarchy, option for longer keys (256 bit), handover between eNBs (X2), backhaul (S1) protection.
+
+\paragraph{Key hierarchy}
+to limit attack possibilities and impact.
+Master key $K$ (128 bits, stored on HSS+SIM), confidentiality key $CK$, integrity key $IK$, etc.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{images/10-4g-key-hierarchy.png}
+	\caption{LTE Key Hierarchy}
+	\label{fig:4g-key-hierarchy}
+\end{figure}
+
+\paragraph{Backhaul + EPC protection}
+For backhaul, the LTE spec recommends physical protection.
+For EPC, the spec is vague (``division of security domains'').
+In practice both are secured using standard IP security practices (VPN, PKI).
+
+\paragraph{Handover + Key Separation}
+Reduced attack surface and key scope by limiting key lifetime of $K_{eNB}$.
+E.g. different keys for different eNBs/cells.
+
+\paragraph{Location tracking} \mbox{} \\
+\underline{Background:}
+The service area is divided intro \textit{tracking areas TAs} containing multiple cells (each controlled by an eNodeB that broadcasts information such as the TA code, mobile network code, cell ID).
+UE sends IMSI with the Attach request, in which the operator assigns temporary identifiers that are used subsequently (TMSI, GUTI\footnote{Global unique temporary identifier}).
+
+\underline{Adversary:}
+Goal: learn user locations.
+Capabilities: transmit/receiver radio signals, possible with commercial USRPs.
+Advantage: GUTI re-allocation depends on operator, possibly not changed for multiple day.
+
+\underline{Attack:}
+\begin{enumerate}
+	\item Set up fake BS.
+	\item Monitor user presence in TA.
+	\item Learn precise location:
+	actively send unprotected \textit{RRC Connection Reconfig} messages, to which the UE responds with a \textit{Measurement Report} containing the signal strengths of neighbouring cells and its GPS location.
+\end{enumerate}
+
+\underline{Analysis:}
+Not all signalling/control messages are integrity protected/authenticated.
+Spec allows this explicitly for troubleshooting (availability versus privacy).
+
+\paragraph{MITM} \mbox{} \\
+\underline{Background:}
+MAC layer assigns unique \textit{Radio Network Temporary Identifiers RNTIs} to distinguish UEs.
+eNodeB uses \textit{Downlink Control Information DCI} to notify UEs when radio resources are available.
+Also recall that EEA2 uses AES-CTR for encryption (XORs keystream with plaintext).
+
+\underline{Attack:}
+\begin{enumerate}
+	\item Identify UE from encrypted traffic: observe connection establishment, learn TMSI+RNTI, use paging to map TMSI to phone number.
+	\item Modify/redirect encrypted traffic: often uplink is encrypted but not integrity protected. Xor ciphertext with ``manipulation mask'' (try-and-error).
+\end{enumerate}
+
+\underline{Analysis:}
+Identifiers and lower layers, encryption on higher layers.
+Integrity protection optional.
+
+\paragraph{Jamming/DoS}
+Brute-force jamming always possible, but requires a lot of power.
+Instead, targeting specific control channels can be effective, too (see next point).
+
+\paragraph{Signal Overshadowing (SigOver)} \mbox{} \\
+\underline{Idea:}
+Broadcast signals are not integrity protected (e.g. \textit{System Information Blocks SIBs)}.
+Spoof them by overshadowing specific frames of the legitimate broadcasts (providing a misconfiguration to prevent the UE from connecting).
+
+\underline{Analysis:}
+Low jamming-to-signal ratio (J/S), thus stealthy (not as obvious as a fake BS).
+Only downlink affected, thus undetected by the base station.
+Challenges: time+frequency synchronisation with the legitimate signal, distance/delay estimation to the UE, phone may quickly reconnect to another cell.
+
+\underline{Commercial Mobile Alert Service CMAS} messages (``presidential alerts'') are also delivered via SIB12, allowing signal overshadowing.
+
+\paragraph{Keystream Reuse Attack / ReVoLTE} \mbox{} \\
+\underline{Idea:} IV for EEA comprised of a counter, radio bearer ID and radio direction.
+\\
+Unfortunately, many operators re-use bearer IDs and reset counter for subsequent calls (exactly what we need!).
+Adversary can initiate a second call just after the target call and record both keystreams.
+\\
+Fix: don't repeat id and counter.
+
+\paragraph{4G Summary}
+New crypto algorithms, new core network.
+Small security improvements (key hierarchy, handover protection), but not yet perfect.
+\\
+Types of attacks: SigOver, fake base stations, man-in-the-middle.
+\\
+Attack properties: stealthiness/detectability, power requirement, J/S ratio.
+
 
 \subsection{5G}
+
+\paragraph{Overview}
+Currently being deployed (2019/2020).
+\\
+\underline{Radio link}: \textit{5G New Radio NR}, optimised OFDM, massive MIMO, two frequency ranges (FR1: sub-6GHz, FR2: mmWave range, 24-100GHz, high-throughput, high-bandwidth).
+Beam management to steer beams with a phase array allows connecting more devices.
+\\
+\textit{Time Division Duplex TDD} allows the same channel/frequency to be used for both up- and downlink, with different time intervals for different directions.%
+\footnote{Compare this with LTE which used FDD: the uplink and downlink used different frequencies.}
+On one hand this allows flexible allocation, but on the other it requires precise synchronisation!
+
+\paragraph{Attacks}
+Some ideas as research is ongoing.
+\begin{itemize}
+	\item Beam stealing: attack beam training to steer beams away from victims (shown for IEEE 802.11ad)
+	\item Broadband jamming (DoS): increasingly difficult due to large bandwidth (power constraint) $\implies$ need protocol-aware spoofing for DoS (challenge: tight synchronisation).
+	\item PSS\footnote{Primary Synchronisation Signal} spoofing:
+	soft takeover: synchronise to cell, introduce PSS at correct timing then slowly move peak away (see GNSS \autoref{sec:gps-spoof}).
+\end{itemize}
+
+\paragraph{5G Security Summary}
+Similar crypto algorithms.
+Better replay protection for AKA (SIM generates nonces).
+User tracking mitigations (SIM can encrypt IMSI/TMSI with home operator's public key, stricter policies for changing temporary ids).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/10-overview.png}
+	\caption{Cellular Security Summary}
+	\label{fig:overview}
+\end{figure}
 
