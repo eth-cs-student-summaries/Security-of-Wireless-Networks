@@ -181,7 +181,14 @@ However, by requesting the routing info from the HLR and with that the cell id f
 \end{figure}
 
 \paragraph{Intercepting Calls}
-By overwriting the service control function address an attacker can MITM a voice call.
+See \autoref{fig:ss7-calls}.
+\begin{enumerate}
+	\item Attacker overrides the \textit{GSM Service Control Function (gsmSCF)} in the MSC with their own.
+	\item When the target makes a call, the MSC now contacts the attacker.
+	\item The attacker learns the phone number and rewrites it towards their recording proxy.
+	\item MSC sets up call to the proxy.
+	\item Proxy bridges call to the intended receiver.
+\end{enumerate}
 
 \begin{figure}
 	\centering
@@ -400,7 +407,7 @@ Also recall that EEA2 uses AES-CTR for encryption (XORs keystream with plaintext
 \end{enumerate}
 
 \underline{Analysis:}
-Identifiers and lower layers, encryption on higher layers.
+Identifiers on lower layers, encryption on higher layers.
 Integrity protection optional.
 
 \paragraph{Jamming/DoS}

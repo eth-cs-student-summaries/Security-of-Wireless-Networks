@@ -94,7 +94,8 @@ Prevents fake signal generation and individual signal delay.
 
 \underline{Disadvantages:}
 Requires pre-shared public satellite keys.
-Does NOT prevent full-band delay.
 Slightly inefficient (longer latency until signal lock).
-Replay attacks (?).
+Requires loose synchronisation (after $dt$ the attacker knows the spreading code and can spoof).
+Does NOT prevent full-band delay.
+Relay/replay attacks (record signal and replay full band in another location in real time).
 

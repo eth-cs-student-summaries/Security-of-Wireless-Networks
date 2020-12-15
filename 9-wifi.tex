@@ -156,9 +156,10 @@ Better encryption (AES-128) and integrity (CBC-MAC, using \textit{authenticate-t
 Better authentication with a 4-way handshake.
 
 \underline{Handshake:}\\
-Goal: Starting from a pre-shared key (PMK) provide mutual authentication and establish a session key (PTK).
+Goal: Starting from a \textit{Pairwise Master Key PMK} (that is derived from a shared passphrase) provide mutual authentication and establish a session key (\textit{Pairwise Transient Key PTK}).
 \\
 Steps: exchange nonces (msg1,2), derive PTK using PMK + nonces + MAC addresses, authenticate exchange (msg3,4).
+Note that in msg2+3 the \textit{Message Integrity Code MIC} is also transmitted (missing in \autoref{fig:wpa2-handshake}).
 \\
 Proven ``secure'' in 2005 (mutual authentication and password is not leaked).
 
@@ -168,6 +169,10 @@ Proven ``secure'' in 2005 (mutual authentication and password is not leaked).
 	\caption{WPA2 Handshake}
 	\label{fig:wpa2-handshake}
 \end{figure}
+
+\underline{Dictionary attack}: \\
+An adversary can capture the ANonce, SNonce and MIC.
+\textit{If} the user chose a weak passphrase, then by brute force an attacker can try different passphrases, compute different PTKs and thus different MICs and compare the result to the captured MIC.
 
 \href{https://www.krackattacks.com/}{\underline{Key Reinstallation Attack (KRACK)} (2017):} \\
 Goal: force a keystream reuse.
