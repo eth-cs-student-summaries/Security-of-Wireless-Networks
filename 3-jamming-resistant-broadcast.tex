@@ -45,7 +45,7 @@ requires highly flexible, powerful base station.
 Requires a feedback channel.
 Requires a growing number of shared secrets (and receivers must be known).
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[scale=1.4]{images/3-chiang.png}
 	\caption{Dynamic Jamming Mitigation -- cover codes (red circle), test code (green square)}
@@ -57,7 +57,7 @@ Above techniques lead to a circular dependency.
 We need techniques without shared secrets!
 Idea: if we cannot coordinate sender and receiver, then don't even try (see next two techniques).
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.4]{images/3-jamming-key-cycle.png}
 	\caption{Circular dependency between anti-jamming and key establishment}
@@ -67,7 +67,7 @@ Idea: if we cannot coordinate sender and receiver, then don't even try (see next
 In addition, pre-loading shared keys in full of problems:
 requires a trusted party, key revocation, new clients joining, etc.
 
-\paragraph{Uncoordinated Frequency Hopping Spread Spectrum UFH}
+\paragraph{Uncoordinated Frequency Hopping Spread Spectrum UFHSS}
 Neither attacker nor legitimate receivers can predict which channels are used.
 Equivalent to FH in terms of jamming protection (but not in throughput).
 
@@ -98,7 +98,7 @@ Solution: cryptographic linking of fragments (but without a shared key).
 E.g. hash linking, one-way accumulators, short signatures.
 
 \underline{Disadvantages}:
-Throughout up to 1000x less than FH.
+Throughput up to 1000x less than Frequency Hopping.
 Higher latency (depending on attacker strengths, i.e. how high the chances are that the receiver gets a packet).
 
 \begin{figure}
