@@ -1,0 +1,100 @@
+\documentclass[paper=a4, parskip=half-]{scrartcl}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{marvosym} % for the \Lightning symbol
+\usepackage{amssymb} % more icons/symbols
+\usepackage{tablefootnote} % for footnotes in tables
+% not in standard texlive, can't be asked to figure it out now
+%\usepackage{ccicons} % creative commons icon
+\usepackage{hyperref} % for hyper links
+\usepackage[dvipsnames]{xcolor} % to color stuff -- dvipnames for additional color names
+\usepackage[shortlabels]{enumitem} % to modify enumeration labels
+\usepackage{tcolorbox} % for colored boxes - see https://tex.stackexchange.com/questions/66154/how-to-construct-a-coloured-box-with-rounded-corners/172608#172608
+\usepackage{tikz} % drawing stuff
+\usepackage{eurosym} % € (no, default LaTeX font doesn't include it)
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\usepackage{geometry}
+\geometry{
+a4paper,
+left=20mm,
+right=20mm,
+top=20mm,
+bottom=30mm,
+}
+
+
+\title{Security of Wireless Networks}
+\author{\texttt{\{fvisconti\}@ethz.ch}}
+\date{ETH Zürich, HS 2022}
+
+% Custom commands
+\newcommand{\setzeroone}{\lbrace 0, 1 \rbrace} % => {0,1} (Notice the missing $$)
+\newcommand{\horizontaldivider}{\begin{center} \line(1,0){350} \end{center}}
+
+\begin{document}
+
+\begin{titlepage}
+    \maketitle
+
+    \vspace{5cm}
+    \thispagestyle{empty}
+
+
+    \begin{abstract}
+        This is a summary for the course \textit{Security of Wirless Networks HS2022} at ETH Zürich.        This summary was originally created during the autumn semester 2020 by
+
+        \texttt{thgoebel@ethz.ch}.
+        Due to the few changes in syllabus content in the past we have reason to believe that it is also relevant beyond that very semester.
+
+        We do not guarantee correctness or completeness, nor is this document endorsed by the lecturers.
+        Feel free to point out any erratas.
+    \end{abstract}
+
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+\newpage
+
+
+\input{1-wireless-basics}
+\newpage
+
+\input{2-jamming-basics}
+\newpage
+
+\input{3-jamming-resistant-broadcast}
+\newpage
+
+\input{4-gps}
+\newpage
+
+\input{5-distance-measurement}
+\newpage
+
+\input{6-critical-transport-infra}
+\newpage
+
+\input{7-physical-based-security}
+\newpage
+
+\input{8-broadcast-auth-device-pairing}
+\newpage
+
+\input{9-wifi}
+\newpage
+
+\input{10-cellular}
+\newpage
+
+\input{11-contact-tracing}
+\newpage
+
+\input{appendix}
+
+\end{document}
