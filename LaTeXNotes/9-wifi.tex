@@ -64,8 +64,8 @@ Data frames (user traffic), control frames (ACK, RTS/CTS), management frames (be
 Easy --- just install any packet capture software (such as Wireshark) and set the wireless interface to ``promiscuous mode''.
 
 \paragraph{Communication (un)fairness}
-DCF is fair -- assuming all stations adhere to it!
-However by modifying backoff parameters in the wireless driver one can behave selfishly to get higher throughput.
+DCF is fair --- assuming all stations adhere to it!
+However by modifying backoff parameters in the wireless driver one can behave selfishly to get a higher throughput.
 
 \paragraph{Jamming} \mbox{} \\
 \underline{Simple:} \\
@@ -120,10 +120,10 @@ Wrong idea during design: ``in-flight'' modification of packets may be hard, but
 
 \subsubsection*{WiFi Protected Access WPA / Temporal Key Integrity Protocol TKIP}
 
-Designed as a transitional mechanism in 2003 and to be compatible to WEP devices (though in 2019 still $\approx$ 50\% of networks accept it...).
+Designed as a transitional mechanism in 2003 and to be compatible to WEP devices (though in 2019 still $\approx$ 50\% of networks accept it\dots).
 
 \underline{Idea:}\\
-Prevent keystream reuse and use a cryptographic MAC, while staying compatible to WEP.
+Prevent keystream reuse and use a cryptographic MAC, while staying compatible to WEP.\@
 ``Achieved'' by augmenting encryption with per-packet key mixing, RC4 keystream filtering, a new integrity mechanism (MICHAEL) and counters for replay protection (TSC).
 This allows to keep the WEP mechanism in hardware but change the inputs given to it.
 
@@ -163,21 +163,20 @@ Note that in msg2+3 the \textit{Message Integrity Code MIC} is also transmitted 
 \\
 Proven ``secure'' in 2005 (mutual authentication and password is not leaked).
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{images/9-wpa2-handshake.png}
-	\caption{WPA2 Handshake}
+	\caption{WPA2 Handshake}%
 	\label{fig:wpa2-handshake}
 \end{figure}
 
 \underline{Dictionary attack}: \\
-An adversary can capture the ANonce, SNonce and MIC.
-\textit{If} the user chose a weak passphrase, then by brute force an attacker can try different passphrases, compute different PTKs and thus different MICs and compare the result to the captured MIC.
+An adversary can capture the ANonce, SNonce and MIC.\@ \textit{If} the user chose a weak passphrase, then by brute force an attacker can try different passphrases, compute different PTKs and thus different MICs and compare the result to the captured MIC.\@
 
 \href{https://www.krackattacks.com/}{\underline{Key Reinstallation Attack (KRACK)} (2017):} \\
 Goal: force a keystream reuse.
 \\
-Observations: AP may retransmit msg3 if no ACK. Each time, client reinstalls the \textit{same} PTK, and in the process it resets some counters.
+Observations: AP may retransmit msg3 if no ACK.\@ Each time, client reinstalls the \textit{same} PTK, and in the process it resets some counters.
 This resulting in the same keystream being reused.
 \\
 Approach: Replay msg3.
@@ -200,5 +199,5 @@ Has forward secrecy.
 \href{https://wpa3.mathyvanhoef.com/}{\underline{Dragonblood} (2020):}\\
 Transition mode allows downgrade to WPA2.
 \\
-Timing attack: execution time of turning the password into a group element at the start of the handshake depends on the password (i.e. a side-channel attack, though only for bad curves).
+Timing attack: execution time of turning the password into a group element at the start of the handshake depends on the password (i.e.\ a side-channel attack, though only for bad curves).
 
