@@ -17,9 +17,7 @@ Protects against $j-1$ colluding receivers, ensuring that each receiver has at l
 	\item \textbf{[Public] Channel Allocation Table:}
 	Defines which channels any receiver should listen on, such that $j-1$ receivers do not cover all channels of any other receiver (set coverage).
 	\item \textbf{[Secret] Frequency Allocation Table:}
-	Mapping from channel id to frequencies.
-	Derived using a PRG.
-	The complete table is only known to the base station.
+	Mapping from channel id to frequencies. Derived using a PRG.\@ The complete table is only known to the base station.
 \end{itemize}
 
 \underline{Disadvantages}:
@@ -32,7 +30,7 @@ Counteract jamming by using a balanced binary key tree.
 Each node in the tree corresponds to a spreading code $C_i$.
 Each receiver $N_i$ is assigned a leaf and knows all codes on the path from the root to that leaf.
 \\
-The base station transmits on (a) a disjoint cover of codes (i.e. all users can decode exactly one code) and (b) a set of test codes.
+The base station transmits on (a) a disjoint cover of codes (i.e.\ all users can decode exactly one code) and (b) a set of test codes.
 If a client receives a test code but not the detectable code, it reports jamming.
 \\
 Splitting and reforming of the tree enables jamming mitigation.
@@ -45,7 +43,7 @@ Requires a growing number of shared secrets (and receivers must be known).
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.4]{images/3-chiang.png}
-	\caption{Dynamic Jamming Mitigation -- cover codes (red circle), test code (green square)}
+	\caption{Dynamic Jamming Mitigation --- cover codes (red circle), test code (green square)}%
 	\label{fig:chiang}
 \end{figure}
 
@@ -57,7 +55,7 @@ Idea: if we cannot coordinate sender and receiver, then don't even try.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/3-jamming-key-cycle.png}
-	\caption{Circular dependency between anti-jamming and key establishment}
+	\caption{Circular dependency between anti-jamming and key establishment}%
 	\label{fig:jamming-key-cycle}
 \end{figure}
 
@@ -82,26 +80,26 @@ Hops from one frequency to the other (sequentially is fine), in the hope of rece
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/3-ufh.png}
-	\caption{UFH transmitter steps}
+	\caption{UFH transmitter steps}%
 	\label{fig:ufh}
 \end{figure}
 
 \underline{Issue with fragment linking:} \\
 The signature is only verified at the end for the entire message.%
-\footnote{The signature is based on public-keys and a mutually trusted -- but potentially offline -- certificate authority CA.}
+\footnote{The signature is based on public-keys and a mutually trusted --- but potentially offline --- certificate authority CA.}
 Since there are exponentially many combinations for re-assembly, the attacker can now perform a DoS on a logical (rather than physical) level (pollution attack).
 \\
 Solution: cryptographic linking of fragments (but without a shared key).
-E.g. hash linking, one-way accumulators, short signatures.
+E.g.\ hash linking, one-way accumulators, short signatures.
 
 \underline{Disadvantages}:
 Throughput up to 1000x less than Frequency Hopping.
-Higher latency (depending on attacker strengths, i.e. how high the chances are that the receiver gets a packet).
+Higher latency (depending on attacker strengths, i.e.\ how high the chances are that the receiver gets a packet).
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/3-ufh-fragment-linking.png}
-	\caption{UFH fragment linking -- exponentially many candidate messages}
+	\caption{UFH fragment linking --- exponentially many candidate messages}%
 	\label{fig:ufh-fragment-linking}
 \end{figure}
 
@@ -110,11 +108,10 @@ Neither attacker nor legitimate receivers can predict which spreading codes are 
 The public code set $C$ is composed of $n$ code sequences, each containing $l$ spreading codes.%
 \footnote{This allows a message to be fragmented into $l$ pieces.}
 Despreading is done by trial-and-error: it requires the correct code sequence and correct synchronisation (which fragment are we at?).
-The message is also repeatedly sent because of possible jamming -- possibly in parallel to improve throughput.
+The message is also repeatedly sent because of possible jamming --- possibly in parallel to improve throughput.
 
-\underline{Optimisation}: first transmit the message $M$ with a secret spreading code $K$ using DSSS.
-Then transmit the spreading code $K$ using UDSSS.
-\\
-Advantage: quicker decoding, longer messages, flexible security level.
+\underline{Optimisation}: first transmit the message $M$ with a secret spreading code $K$ using DSSS.\@ Then transmit the spreading code $K$ using UDSSS.\@
+
+\underline{Advantage}: quicker decoding, longer messages, flexible security level.
 
 

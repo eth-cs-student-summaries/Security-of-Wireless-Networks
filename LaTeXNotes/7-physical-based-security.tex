@@ -8,14 +8,14 @@ In a complex, multi-path rich environment channel exhibit time-varying, stochast
 For receivers separated by $> \lambda / 2$ their channels are \underline{not} correlated.
 
 Thus the channels between sender $S$ and receiver $R$ are ``random'' and cannot be known/predicted by the attacker.
-In particular, the attacker cannot remotely measure multipath fading components of the signal strength.
+In particular, the attacker cannot remotely measure multi-path fading components of the signal strength.
 
 \paragraph{Key Agreement through Channel Properties}
 We can leverage different properties of the channel, e.g. RSSI\footnote{Received Signal Strength Indication}, CIR\footnote{Carrier-to-interference ratio} or signal phase.
 
 The generic steps are the following:
 \begin{enumerate}
-	\item Signal Acquisition and Quantisation
+	\item Signal Acquisition and Quantization
 	\item Reconciliation (error correction, privacy amplification)
 	\item Key confirmation
 \end{enumerate}
@@ -54,7 +54,7 @@ The sender applies a transmission filter $F$ that is constructed such that $R_r 
 Same as zero forcing, but we only assume that the channel to the intended receiver $R_1$ is known (but not the channels to the attacker).
 Construct the filter $F$ such that for everybody but $R_1$ the result $R_r$ contains a jamming signal (i.e. noise).
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.3]{images/7-mimo.png}
 	\caption{MIMO channel}
@@ -90,7 +90,7 @@ Furthermore, if $DJ >> \lambda/2$ then the attacker can use directional antennas
 Thus the only ``safe'' case is $DJ < \lambda/2$ (i.e. when channels from D to A and from J to A are highly correlated).
 
 However, this does NOT hold:
-a MIMO attacker can retrieve the data even when $DJ < \lambda/2$, see the following:
+a MIMO attacker can retrieve the data even when $DJ < \lambda/2$, see the following.
 
 \paragraph{Attack in Line of Sight LOS Model} 
 The attacker places two antennas $A, B$ (see \autoref{fig:friendly-jamming-attack}).
@@ -99,7 +99,7 @@ However, even with imperfect placement some data can still be recovered (with so
 
 When we also consider multipath effects (additional changes in amplitude and phase offsets) the attack becomes much harder.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/7-friendly-jamming-attack.png}
 	\caption{Friendly Jamming Attack Through Antenna Placement}
@@ -107,7 +107,7 @@ When we also consider multipath effects (additional changes in amplitude and pha
 \end{figure}
 
 \paragraph{Conclusion}
-Jamming works well for access control (in the sense that $J$ prevents malicious signals being send to $D$).
+Jamming works well for access control (in the sense that $J$ prevents malicious signals being sent to $D$).
 It does NOT work for confidentiality since a MIMO attacker can retrieve data even when $DJ < \lambda/2$.
 
 In other words, the IMD Shield protects against malicious commands being sent to the implant, but not against an attacker listening to outgoing signals.
@@ -153,7 +153,7 @@ Check if hamming weight%
 \footnote{Recall that the hamming weight is the number of bits unequal to 0.}
 $H(m)=|m|/2$. If yes, the message was not modified.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/7-integrity-code.png}
 	\caption{Integrity Codes}

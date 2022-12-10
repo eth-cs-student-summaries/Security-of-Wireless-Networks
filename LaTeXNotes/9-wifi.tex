@@ -17,14 +17,14 @@
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/9-wifi-terminology.png}
-	\caption{WiFi System}
+	\caption{WiFi System}%
 	\label{fig:wifi-terminology}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/9-wifi-versions.png}
-	\caption{WiFi Standard Versions}
+	\caption{WiFi Standard Versions}%
 	\label{fig:wifi-versions}
 \end{figure}
 
@@ -32,13 +32,13 @@
 Medium access control mechanism.
 Part of the \textit{Distributed Coordination Function DCF}.
 \begin{enumerate}
-	\item \textit{Carrier sense} -- monitor medium to check if it is idle
-	\item \textit{Collision avoidance} -- if another node sends, wait for a randomised \textit{backoff period}, then listen again
-	\item \textit{Transmit} -- send entire frame, wait for ACK, if no ACK then backoff and wait
+	\item \textit{Carrier sense} --- monitor medium to check if it is idle
+	\item \textit{Collision avoidance} --- if another node sends, wait for a randomised \textit{backoff period}, then listen again
+	\item \textit{Transmit} --- send entire frame, wait for ACK, if no ACK then backoff and wait
 \end{enumerate}
 
 \paragraph{Hidden terminal problem}
-Occurs if a node B can communicate with two nodes A, C that can not communicate with each other.
+Occurs if a node B can communicate with two nodes A, C that cannot communicate with each other.
 That is, if they both tried to send data to B they would individually sense the medium to be idle, but then they would clash at B anyway.
 See \autoref{fig:hidden-terminal}.
 
@@ -47,10 +47,10 @@ Now when A sends a RTS even though C does not receive it, C still receives the C
 \\
 This feature is optional in IEEE 802.11!
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{images/9-hidden-terminal.png}
-	\caption{Hidden Terminal Problem}
+	\caption{Hidden Terminal Problem}%
 	\label{fig:hidden-terminal}
 \end{figure}
 
@@ -61,7 +61,7 @@ Data frames (user traffic), control frames (ACK, RTS/CTS), management frames (be
 \subsection{Basic Manipulations}
 
 \paragraph{Capturing all frames}
-Easy -- just install any packet capture software (such as Wireshark) and set the wireless interface to ``promiscuous mode''.
+Easy --- just install any packet capture software (such as Wireshark) and set the wireless interface to ``promiscuous mode''.
 
 \paragraph{Communication (un)fairness}
 DCF is fair -- assuming all stations adhere to it!

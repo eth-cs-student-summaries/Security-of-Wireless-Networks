@@ -131,8 +131,8 @@ Security not formally proven and unclear!
 	Low Rate Pulse LRP                & High Rate Pulse HRP                      \\ \hline
 	Can use single pulse              & No single pulse (energy too low)         \\
 	Multi-pulse with UWB-PR efficient & UWB-PR + variance-based seem inefficient \\
-	Open security specs               & No open security analysis                \\ 
-	Low-cost, low-energy              &                                   		 \\ \hline      
+	Open  and simple security specs   & No open security analysis                \\ 
+	Low-cost, low-energy              & More transparency needed 		 \\ \hline      
 	\end{tabular}
 	\end{table}
 
@@ -140,13 +140,22 @@ In HRP, receivers cannot decode individual pulses. Instead, they need to find th
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/5-early-peak.png}
-	\caption{Message Time of Arrival Code MTAC}%
+	\caption{Early Peak}%
 	\label{fig:earlypeak}
 \end{figure}
 
+\subsection{Ghost-Peak Attack}
+This attack shows that physical-layer attacks on HRP are a real threat. Apple/NXP/Qorvo use hidden ToA estimation algorithms making it hard to evaluate if their HRP ranging systems are truly secure. Instead, these algorithms should be public and comprehensively evaluated.
+Like with ciphers/signatures/MACs, their security should rely only on the unpredictability of the STS, not on the secrecy of the algorithms.
+It resulted in a successful reduction of the perceived distance of $4-12$ meters.
+
+\paragraph{Main idea}
+The attack basically consists in injecting a packet in-sync (micro-seconds) with the legitimate transmission but with varying power of Preamble, SFD, STS.\@ The attack is based on the assumptions that there is no knowledge of the keys shared between victim devices and the attacker is not able to predict the Scrambled Timing Sequence (STS). 
+The necessary equipment is inexpensive and easily purchasable.
+
 \paragraph{Message Time of Arrival Code MTAC}
 New class of cryptographic primitives that verify the integrity of message arrival time.
-E.g.: single-pulse, UWB-PR, Variance-based detection.
+E.g.\ single-pulse, UWB-PR, Variance-based detection.
 
 \begin{figure}[h]
 	\centering
@@ -158,11 +167,22 @@ E.g.: single-pulse, UWB-PR, Variance-based detection.
 \paragraph{Verifiable Multilateration}
 Multiple verifiers with known locations want to determine the position of a prover.
 C.f. GPS trilateration.
-E.g. to position autonomous cars using cell towers.
+E.g.\ to position autonomous cars using cell towers.
+
+\paragraph{Distance Bounding}
+A prover who wants to prove its position should quickly receive $N_V$, compute $Ff(N_V,N_P)$ and send it.
+The verifier estimates prover's processing time $=t_p$. If the attacker's processing time is $0$, then he can cheat by $t_p/2$. Thus, ideally, $t_p=0s$; usually, though, $t_p=1-2ns$ which means that the attacker can only shorten the distance by $15-30cm$.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{images/5-dist-bounding.png}
+	\caption{Distance Bounding}%
+	\label{fig:dist_bounding}
+\end{figure}
+An evolution of this is Challenge reflection with Channel Selection, where the prover only needs to reflect $N_V$ and the verifier does all the work. This reduces $t_p$ to $0$.
 
 \paragraph{Future Work}
 \begin{itemize}
-	\item Secure Positioning (e.g. verifiable multilateration)
+	\item Secure Positioning (e.g.\ verifiable multilateration)
 	\item WiFi 802.11 and 5G ranging (some initial work)
 	\item Efficient implementation + deployment
 \end{itemize}
