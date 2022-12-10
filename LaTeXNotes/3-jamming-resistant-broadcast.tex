@@ -1,14 +1,11 @@
 \section{Jamming-Resistant Broadcast}
 
 \paragraph{Broadcast Communication}
-One sender, many receivers.
-Inherently open: receivers may join and leave at any time.
-\underline{All} receivers listen (c.f. multicast).
-E.g. radio (FM/AM), GPS.
+One sender, many receivers. Inherently open: receivers may join and leave at any time. \underline{All} receivers listen (c.f.\ multicast). E.g.\ radio (FM/AM), GPS.\@
 
-Challenges when securing broadcast:  \\
+\paragraph{Challenges when securing broadcast}
 many and unknown receivers, colluding receivers, internal + external attackers.
-In particular, plain spreading techniques (with group keys) do not work -- an interal attacker can use their knowledge to jam other receivers.
+In particular, plain spreading techniques (with group keys) do not work --- an internal attacker can use their knowledge to jam other receivers.
 
 \paragraph{Based on FHSS}
 Broadcast Anti-Jamming System due to Desmedt et al. \\
@@ -24,7 +21,7 @@ Protects against $j-1$ colluding receivers, ensuring that each receiver has at l
 	Derived using a PRG.
 	The complete table is only known to the base station.
 \end{itemize}
-%
+
 \underline{Disadvantages}:
 effectively a multicast solution since it requires a shared secret between the base station and each receiver.
 
@@ -45,7 +42,7 @@ requires highly flexible, powerful base station.
 Requires a feedback channel.
 Requires a growing number of shared secrets (and receivers must be known).
 
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.4]{images/3-chiang.png}
 	\caption{Dynamic Jamming Mitigation -- cover codes (red circle), test code (green square)}
@@ -55,16 +52,16 @@ Requires a growing number of shared secrets (and receivers must be known).
 \paragraph{Anti-Jamming---Key-Establishment Dependency}
 Above techniques lead to a circular dependency.
 We need techniques without shared secrets!
-Idea: if we cannot coordinate sender and receiver, then don't even try (see next two techniques).
+Idea: if we cannot coordinate sender and receiver, then don't even try.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/3-jamming-key-cycle.png}
 	\caption{Circular dependency between anti-jamming and key establishment}
 	\label{fig:jamming-key-cycle}
 \end{figure}
 
-In addition, pre-loading shared keys in full of problems:
+In addition, pre-loading shared keys is full of problems:
 requires a trusted party, key revocation, new clients joining, etc.
 
 \paragraph{Uncoordinated Frequency Hopping Spread Spectrum UFHSS}
@@ -82,7 +79,7 @@ Transmitter steps:
 Receiver steps: same process but reversed (plus packet ordering).
 Hops from one frequency to the other (sequentially is fine), in the hope of receiving a fragment.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/3-ufh.png}
 	\caption{UFH transmitter steps}
@@ -101,7 +98,7 @@ E.g. hash linking, one-way accumulators, short signatures.
 Throughput up to 1000x less than Frequency Hopping.
 Higher latency (depending on attacker strengths, i.e. how high the chances are that the receiver gets a packet).
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/3-ufh-fragment-linking.png}
 	\caption{UFH fragment linking -- exponentially many candidate messages}

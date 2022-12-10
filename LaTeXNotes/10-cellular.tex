@@ -476,3 +476,9 @@ User tracking mitigations (SIM can encrypt IMSI/TMSI with home operator's public
 	\label{fig:overview}
 \end{figure}
 
+
+\subsection{Questions}
+
+\textbf{What capabilities does an adversary need to perform location tracking on a 4G network?} He needs to get a hold of the IMSI of the UE. This can be done overshadowing a legitimate message after a service or attach request with a Identity Request message, to which the UE will happily reply with its IMSI. Or, the attacker could use two passive base stations to record the propagation delay and use triangulation to calculate the origin of the signal.
+
+\textbf{Describe the security requirements (Authentication, Encryption and Integrity) for the control and user plane in 4G. What does the standard prescribe/rec- ommend? Do the operators follow those recommendations?} MISSING DESCRIPTION. Authentication is required in both the control and user plane, encryption is optional for both but often used, integrity is mandatory for control plane but not user data. 

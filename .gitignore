@@ -16,3 +16,5 @@
 *.fdb_latexmk
 
 *.fls
+
+*.json
