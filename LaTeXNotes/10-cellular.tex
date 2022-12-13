@@ -35,7 +35,7 @@ access channel, access grant channel).
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.45]{images/10-2g-arch.png}
-	\caption{Architecture of 2G}
+	\caption{Architecture of 2G}%
 	\label{fig:2g-arch}
 \end{figure}
 
@@ -342,7 +342,7 @@ See \autoref{fig:4g-arch}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/10-4g-arch.png}
-	\caption{LTE Architecture}
+	\caption{LTE Architecture}%
 	\label{fig:4g-arch}
 \end{figure}
 
@@ -358,23 +358,37 @@ See \autoref{fig:4g-network-stack}. From top to bottom:
 Note that everything below the PDCP layer is unencrypted.
 Thus most sniffing+spoofing attacks focus on the layers below.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/10-4g-network-stack.png}
-	\caption{LTE Network Protocol Stack}
+	\caption{LTE Network Protocol Stack}%
 	\label{fig:4g-network-stack}
 \end{figure}
 
+Uplink congestion control
+
 \paragraph{Security Overview}
 Authentication: similar to AKA.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/10-4g-aka.png}
+	\caption{LTE Architecture}%
+	\label{fig:4g-aka}
+\end{figure}
 
 Encryption/integrity: 3 variants EEA1, EEA2, EEA3 and EIA1, EIA2, EIA3.
 
 Other: extended key hierarchy, option for longer keys (256 bit), handover
 between eNBs (X2), backhaul (S1) protection.
 
-Encryption is optional for the user and control plane, but often used.
-Integrity protection is mandatory for the control plane, but not for user data
+\textbf{Authentication} is \hl{required in both} control and user plane.
+
+\textbf{Encryption} is \hl{optional for both} the user and control plane,
+but often used.
+
+\textbf{Integrity} protection is \hl{mandatory for the control plane}, but
+not for user data
 
 \paragraph{Key hierarchy}
 to limit attack possibilities and impact. Master key $K$ (128 bits, stored on
@@ -459,6 +473,17 @@ Unfortunately, many operators re-use bearer IDs and reset counter for subsequent
 Adversary can initiate a second call just after the target call and record both keystreams.
 \\
 Fix: don't repeat id and counter.
+
+\paragraph{Signal Overshadowing (SigOver)} \mbox{} \\
+\underline{Idea:}
+SigOver is a signal injection attack that exploits the fundamental weakness of physical layer in Long-Term Evolution (LTE). Since LTE communication is based on an open medium, a legitimate signal can potentially be counterfeited by a malicious signal. In addition, although most LTE signaling messages are protected from modification using cryptographic primitives, broadcast messages in LTE have never been integrity protected.\footnote{\href{https://github.com/SysSec-KAIST/sigover_injector}{SigOver}}
+
+This attack has several advantages and differences when compared with existing
+attacks using a fake base station. For example, with a 3 dB power difference
+from a legitimate signal, the SigOver demonstrated a 98\% success rate when
+compared with the 80\% success rate of attacks achieved using a fake base
+station, even with a 35 dB power difference. Given that the SigOver is a novel
+primitive attack, it yields five new attack scenarios and implications.
 
 \paragraph{Adaptive Overshadowing (AdaptOver)} \mbox{} \\
 \underline{Idea:}

@@ -1,4 +1,9 @@
-\section{Digital Contact Tracing}
+\section{Bluetooth Low Energy --- BLE}
+
+\subsection{Overview}
+Todo
+
+\subsection{Digital Contact Tracing}
 
 \paragraph{Goals}
 \textit{Complement} manual contact tracing an a pandemic.
@@ -8,13 +13,14 @@ Using existing technologies and existing devices.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.45]{images/11-why-tracing.png}
+	\includegraphics[scale=0.25]{images/11-why-tracing.png}
 	\caption{Contact Tracing: Motivation}
 	\label{fig:why-tracing}
 \end{figure}
 
 \paragraph{Exposure Notification}
-Deployed by Apple and Google. Inspired by \href{https://github.com/DP-3T/documents}{DP-3T}. Used by many countries.
+Deployed by Apple and Google. Inspired by
+\href{https://github.com/DP-3T/documents}{DP-3T}. Used by many countries.
 
 \underline{Idea:}
 Phones broadcast ephemeral BLE\footnote{Bluetooth Low Energy} beacons.
@@ -23,7 +29,9 @@ When infected, phone uploads the beacons to a public board.
 Phones poll the public board.
 
 \paragraph{DP-3T}
-See the \href{https://github.com/DP-3T/documents/blob/master/DP3T\%20White\%20Paper.pdf}{white paper here}.
+See the
+\href{https://github.com/DP-3T/documents/blob/master/DP3T\%20White\%20Paper.pdf}{white
+	paper here}.
 
 \paragraph{Open questions}
 More evidence is needed in some of the following areas:
@@ -31,11 +39,13 @@ More evidence is needed in some of the following areas:
 	\item How reliable is Bluetooth at estimating proximity?
 	\item How reliable are users to respond to a notification or trigger one?
 	\item What is the financial impact of self-isolating in response to a notification?
-	What demographics are more likely to comply?
+	      What demographics are more likely to comply?
 	\item Access to smartphones, digital exclusion of certain groups.
 	\item Is digital contact tracing a decisive factor?
-	\item Inherent security\footnote{Relay+replay attacks, etc.} and privacy issues\footnote{E.g. if you only met a single person in two weeks and receive a notification, you can reliably de-anonymise them.
-	However, contrast digital (privacy preserving) contact tracing with the data accumulated in manual contact tracing.}
+	\item Inherent security\footnote{Relay+replay attacks, etc.} and privacy
+	      issues\footnote{E.g. if you only met a single person in two weeks and receive a
+		      notification, you can reliably de-anonymise them. However, contrast digital
+		      (privacy preserving) contact tracing with the data accumulated in manual
+		      contact tracing.}
 	\item Public communication, building trust.
 \end{itemize}
-

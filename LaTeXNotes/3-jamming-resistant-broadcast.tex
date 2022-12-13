@@ -13,6 +13,8 @@ Base station transmits on multiple frequencies simultaneously.
 Each receiver listens on a subset of frequencies at a given time.
 Protects against $j-1$ colluding receivers, ensuring that each receiver has at least one non-jammed channel.
 
+\hl{Assumption:} the attacker cannot guess the next-hop or detect-and-jam
+
 \begin{itemize}
 	\item \textbf{[Public] Channel Allocation Table:}
 	Defines which channels any receiver should listen on, such that $j-1$ receivers do not cover all channels of any other receiver (set coverage).
