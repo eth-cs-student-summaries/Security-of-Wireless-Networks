@@ -26,8 +26,8 @@ In other words, the measure of frequency content of the signal. E.g.\ the human
 voice contains frequencies in the range from 30 Hz to 10 kHz, and the bandwidth
 of a single 802.11 channel is 22 MHz.
 
-Note that often the bandwidth of the base-band and that of the carrier (and
-thus that of the modulated signal) differ! E.g.\ see spread spectrum techniques
+Often the \hl{bandwidth of the base-band and that of the carrier} (and
+thus that of the modulated signal) \hl{differ}. For example, see spread spectrum techniques
 (\autoref{sec:jamming-resistant-comm}). Low variability of the signal in time
 corresponds to a small bandwidth, whereas a high variability corresponds to a
 large bandwidth
@@ -40,10 +40,10 @@ large bandwidth
 \end{figure}
 
 \paragraph{Baseband}
-An original transmission signal that has not been modulated or has been
-demodulated to its original frequency, aka the actual \textbf{information
-	signal}. Most telecommunication protocols require base-band signals to be
-converted, or modulated, to a higher frequency in order to be transmitted over
+A \hl{signal that has not been modulated} or has been
+demodulated to its original frequency content, the actual \textbf{information
+	signal}. \hl{Telecommunication protocols require base-band signals to be
+	up-converted}, or modulated, to a higher frequency in order to be transmitted over
 long distances.
 
 \paragraph{Carrier}
@@ -56,10 +56,10 @@ carrier, where $f_c$ is the carrier frequency and $a(t)$ is the amplitude.
 \[ x_{RF} (t) = \Re \{a(t)e^{i\theta (t)}\} = a(t) \cos (2 \pi f_c t + \theta(t))\]
 
 \subparagraph{Upconversion}
-This process is called \textbf{up-conversion}, and it's necessary mainly for
-two reasons: to enable simultaneous transmission of different signals by using
-a different carrier frequency (for each transmission) and to transform a
-complex signal into a real one, since only real signals can actually be
+This process is called \textbf{up-conversion}, and it's \hl{necessary mainly for}
+two reasons: to \hl{enable simultaneous transmission} of different signals by using
+a different carrier frequency (for each transmission) \hl{and to transform a
+	complex signal into a real one}, since only real signals can actually be
 transmitted. At the receiver, it's then down-converted such that the subsequent
 processing can be done in the complex-valued baseband domain.
 
@@ -68,23 +68,23 @@ produce the cosine wave at the chosen (carrier) frequency and a mixer to
 multiply it with the baseband signal, producing the frequency shift.
 
 \paragraph{Modulated Signal}
-A carrier that has been loaded or modulated with the information signal.
+A carrier that has been loaded, or modulated, with the information signal.
 
 \paragraph{Modulation}
 Process of imposing the baseband onto the carrier. The baseband is used to
-alter one aspect of the carrier, such as: signal strength (\textit{amplitude
-	modulation AM}), frequency (\textit{frequency modulation FM}), phase
-(\textit{phase modulation PM}). In other words, one of the values $A, f, \phi$
-in the above equation of the signal is manipulated.
+alter one or more aspects of the carrier, such as: \hl{signal strength} (\textit{amplitude
+	modulation AM}), \hl{frequency} (\textit{frequency modulation FM}), \hl{phase}
+(\textit{phase modulation PM}). In other words, one or more of the values $A, f, \phi$
+in the above equation of the signal are manipulated.
 
 \paragraph{Amplitude-shift keying ASK}
-Modulation technique varying the amplitude of the signal.
+Modulation technique \hl{varying the amplitude of the signal}.
 
 \paragraph{Frequency-shift keying FSK}
-Modulation technique varying the frequency of the carrier.
+Modulation technique \hl{varying the frequency of the carrier}.
 
 \paragraph{Phase-shift keying PSK}
-Modulation technique varying the phase of the carrier. It's used, for example,
+Modulation technique \hl{varying the phase of the carrier}. It's used, for example,
 in WiFi, RFID, Bluetooth. Specific versions include Binary PSK, Quadrature PSK
 and Differential PSK.\@ Example: if the baseband bit is 0 do nothing to the
 carrier, if it is 1 shift the carrier phase by $\pi$.
@@ -122,9 +122,9 @@ a particular direction.
 \end{figure}
 
 \paragraph{Phased Array}
-Array of fixed antennas where the phase of each signal is dynamically adjusted
-so that the signal will be in phase when viewed from a given direction. Allows
-\textit{beam steering} towards a specific direction. Possible applications? Can
+Array of fixed antennas where \hl{the phase of each signal is dynamically adjusted}
+so that the signal will be in phase when viewed from a given direction. \hl{Allows
+	\textit{beam steering}} towards a specific direction. Possible applications? Can
 it be used to achieve security (e.g.\ confidentiality)?
 
 \begin{figure}[h]
@@ -135,8 +135,8 @@ it be used to achieve security (e.g.\ confidentiality)?
 \end{figure}
 
 \paragraph{Transmitter/Receiver}
-Converts from digital to analogue, applies modulation and connects to the
-antenna (and vice versa). Properties: transmitted power, carrier frequency,
+They convert the signal from digital to analogue or viceversa, apply de-/modulation and connects to the
+antenna. Properties: transmitted power, carrier frequency,
 information bandwidth, modulation type, receiver sensitivity.
 
 \paragraph{Software Defined Radio SDR}
@@ -145,11 +145,11 @@ amplifier, de-/modulator) in software rather than processing the signal in
 hardware.
 
 \paragraph{Channel equation}
-See \autoref{fig:signal-strength}.
 
 signal strength at the receiver $=$ transm.\ power $+$ transm.\ antenna gain
 $-$ link loss $+$ receiv.\ antenna gain
 
+See \autoref{fig:signal-strength}.
 Note that, in free space, the power density of an EM wave obeys the
 inverse-square law:
 \[p \propto \frac{1}{d^2} \]
@@ -162,8 +162,8 @@ inverse-square law:
 \end{figure}
 
 \paragraph{Receiver sensitivity}
-The weakest signal from which the receiver can still obtain the desired
-information signal. Depends not just on the antenna gain, but also on other
+The \hl{weakest signal from which the receiver can still obtain the desired
+	information} signal. Depends not just on the antenna gain, but also on other
 factors such as the noise.
 
 \paragraph{Decibel}
@@ -176,7 +176,7 @@ Calculating a value in dB \[ dB(n) = 10 \log_{10} (n) \quad \text{ and } \quad d
 
 \paragraph{Power Spectral Density diagram}
 Depicts the power density (in dB) for a range of frequencies. In simple terms,
-it shows how strong the signal is at a given frequency.
+it \hl{shows how strong the signal is at a given frequency}.
 
 For a signal $x_T(t)$ defined between $(-\frac{T}{2}, \frac{T}{2})$, its power
 in the time domain will be \[P = \lim_{T\rightarrow \infty} \frac{1}{T} \int |x_T(t)|^2 dt \] and its power in the frequency domain will be \[PSD(f) = \lim_{T\rightarrow \infty} \frac{1}{T} \int |X_T(f)|^2 df \]
@@ -201,7 +201,3 @@ authentication.
 Also, higher frequency signals suffer from greater attenuation due to the distance traveled compared to lower frequency signals.
 
 \textbf{Which two properties of the wireless channel are leveraged by systems that rely on those for physical-layer based key establishment?} Channel impulse response and received signal strength.
-
-\textbf{Describe the effect of increasing or decreasing the sub-carrier spacing in an OFDM modulated signal. Assuming the overall bandwidth of the channel stays the same, how does the sub-carrier spacing affect Symbol length, Throughput and complexity of the receiver?} TODO % TODO: increasing sub carrier spacing decreases symbol length because it increases symbol time ???
-% TODO: A longer symbol length makes it more resilient against multi-path interference, but it probably needs a more complex receiver.
-% TODO: Throughput should stay the same ????
