@@ -25,7 +25,7 @@ mechanisms. We focus on the \textit{Global System for Mobile Communications
 \paragraph{Architecture}
 See \autoref{fig:2g-arch}.
 
-Medium access control: FDMA with distinct uplink/downlink frequency channels.
+Medium access control: \hl{FDMA with distinct uplink/downlink frequency channels}.
 TDMA\footnote{Time-division multiple access} to support 8 speech channels on
 the same frequency.
 
@@ -47,21 +47,21 @@ access channel, access grant channel).
 \end{figure}
 
 \paragraph{Security model}
-The main goal was to prevent the misuse of a subscriber identity by a third
-party. Everything based on symmetric shared keys $K_i$. The key is stored in
+The \hl{main goal was to prevent the misuse of a subscriber identity by a third
+	party}. Everything based on symmetric shared keys $K_i$. The key is stored in
 the \textit{Home Location Register HLR} of the provider and on the
 \textit{subscriber identification module SIM} card (and never leaves it).
 
 \underline{Algorithms:}
 A3 for authentication, A5 for encryption, A8 for key derivation.
-Initially secret, but e.g. A5 leaked in the mid 90s, reverse engineered in 1999.
+Initially secret, but A5 leaked in the mid 90s, and got reverse engineered in 1999.
 
 \paragraph{GSM authentication}
 See \autoref{fig:2g-authentication}. From the shared key $K_i$ and a random
 challenge a session key $K_c$ is derived. Together with the frame nonce/counter
 $F_n$ it is used to encrypt the plaintext frame $m_i$.
 
-Note that there is no mutual authentication (only the phone is authenticated)
+Note that there is no mutual authentication (\hl{only the phone is authenticated})
 and messages can be replayed! Also note that since A3 and A8 are executed on
 the SIM card, the operator can choose these!
 
@@ -157,17 +157,17 @@ MITM.
 \paragraph{Overview}
 \textit{Universal Mobile Telecommunication System UMTS} introduced in the early 2000s.
 
-Radio link uses \textit{wideband code-division multiple access W-CDMA},
+Radio link uses \hl{wideband code-division multiple access W-CDMA},
 separate per-user spreading codes, distinct uplink and downlink frequency
 bands.
 
 \paragraph{Protocol}
-New \textbf{authentication and key agreement (AKA)} protocol. Provides mutual
-authentication, mutual replay protection, integrity protection. Also used in
+New \textbf{authentication and key agreement (AKA)} protocol. Provides \hl{mutual
+	authentication, mutual replay protection, integrity protection}. Also used in
 4G+5G (more or less).
 
 Similar design principles like GSM: operator and SIM trusted, phone and visited
-networks untrusted, minimise communication with home network.
+networks untrusted, minimize communication with home network.
 
 \underline{Remarks:} (see \autoref{fig:3g-aka-details})
 \begin{enumerate}
@@ -217,8 +217,8 @@ illegal!). \\ Approaches:
 \end{itemize}
 
 \paragraph{MITM/Fake BS}
-Though AKA authentication is mutual, a MITM perform a downgrade attack to force
-the phone to use GSM (due to co-existence). Also in 3G the MITM can learn the
+Though AKA authentication is mutual, a \hl{MITM perform a downgrade attack to force
+	the phone to use GSM} (due to co-existence). Also, in 3G the MiTM can learn the
 IMSI at the start of AKA.
 
 \underline{Practical considerations:}
@@ -237,8 +237,8 @@ on a tower). Gaining access gives a perfect MITM position, having the keys for
 the gateway to the operator as well as for the radio link.
 
 \paragraph{User tracking}
-Identity (IMSI) is sent before authentication. Even though a temporary identity
-(TMSI) is issued, the IMSI is reused on occasions. Thus user tracking is
+\hl{Identity (IMSI) is sent before authentication}. Even though a temporary identity
+(TMSI) is issued, the IMSI is reused on occasions. Thus, user tracking is
 possible to some extent, but not addressed by the spec (tradeoff possibility of
 abuse versus increased complexity).
 
@@ -279,7 +279,7 @@ Attacks in 2014 by Engel (see the
 \end{figure}
 
 \paragraph{Location tracking}
-Phone locations are stored in the \textit{Gateway Mobile Location Center GMLC},
+\hl{Phone locations are stored in the \textit{Gateway Mobile Location Center GMLC}},
 access to which requires authentication (e.g. law enforcement). However, by
 requesting the routing info from the HLR and with that the cell id from the
 \textit{Mobile Switching Center MSC} where the user is currently logged in, one
@@ -295,7 +295,7 @@ can work around this to still get a rough location.
 \paragraph{Intercepting Calls}
 See \autoref{fig:ss7-calls}.
 \begin{enumerate}
-	\item Attacker overrides the \textit{GSM Service Control Function (gsmSCF)} in the
+	\item Attacker overrides the \textbf{GSM Service Control Function} \textit{(gsmSCF)} in the
 	      MSC with their own.
 	\item When the target makes a call, the MSC now contacts the attacker.
 	\item The attacker learns the phone number and rewrites it towards their recording
@@ -312,7 +312,7 @@ See \autoref{fig:ss7-calls}.
 \end{figure}
 
 \paragraph{SS7 Summary}
-Legacy system with outdated trust model. Bad network management (open
+\hl{Legacy system with outdated trust model}. Bad network management (open
 interfaces, no authentication or access control to control messages). Attacks
 are independent of cryptography and the radio link (i.e. work from far away).
 \\ Some issues were fixed, and LTE has a new signalling system (Diameter).
@@ -372,7 +372,7 @@ Authentication: similar to AKA.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{images/10-4g-aka.png}
+	\includegraphics[scale=0.3]{images/10-4g-aka.png}
 	\caption{LTE Architecture}%
 	\label{fig:4g-aka}
 \end{figure}
@@ -454,23 +454,23 @@ Integrity protection optional.
 Brute-force jamming always possible, but requires a lot of power. Instead,
 targeting specific control channels can be effective, too (see next point).
 
-\paragraph{Signal Overshadowing (SigOver)} \mbox{} \\
-\underline{Idea:}
-Broadcast signals are not integrity protected (e.g. \textit{System Information Blocks SIBs)}.
-Spoof them by overshadowing specific frames of the legitimate broadcasts (providing a misconfiguration to prevent the UE from connecting).
+% \paragraph{Signal Overshadowing (SigOver)} \mbox{} \\
+% \underline{Idea:}
+% Broadcast signals are not integrity protected (e.g. \textit{System Information Blocks SIBs)}.
+% Spoof them by overshadowing specific frames of the legitimate broadcasts (providing a misconfiguration to prevent the UE from connecting), for example by sending a ``Configuration (SIBs) Cell Barred: True".
 
-\underline{Analysis:}
-Low jamming-to-signal ratio (J/S), thus stealthy (not as obvious as a fake BS).
-Only downlink affected, thus undetected by the base station.
-Challenges: time+frequency synchronisation with the legitimate signal, distance/delay estimation to the UE, phone may quickly reconnect to another cell.
+% \underline{Analysis:}
+% Low jamming-to-signal ratio (J/S), thus stealthy (not as obvious as a fake BS).
+% Only downlink affected, thus undetected by the base station.
+% Challenges: time+frequency synchronisation with the legitimate signal, distance/delay estimation to the UE, phone may quickly reconnect to another cell.
 
-\underline{Commercial Mobile Alert Service CMAS} messages (``presidential alerts'') are also delivered via SIB12, allowing signal overshadowing.
+% \underline{Commercial Mobile Alert Service CMAS} messages (``presidential alerts'') are also delivered via SIB12, allowing signal overshadowing.
 
 \paragraph{Keystream Reuse Attack / ReVoLTE} \mbox{} \\
 \underline{Idea:} IV for EEA comprised of a counter, radio bearer ID and radio direction.
 \\
 Unfortunately, many operators re-use bearer IDs and reset counter for subsequent calls (exactly what we need!).
-Adversary can initiate a second call just after the target call and record both keystreams.
+Adversary can initiate a second call just after the target call and record both calls, both unencrypted and ciphered.
 \\
 Fix: don't repeat id and counter.
 
@@ -484,6 +484,12 @@ from a legitimate signal, the SigOver demonstrated a 98\% success rate when
 compared with the 80\% success rate of attacks achieved using a fake base
 station, even with a 35 dB power difference. Given that the SigOver is a novel
 primitive attack, it yields five new attack scenarios and implications.
+
+\underline{Analysis:}
+Low jamming-to-signal ratio (J/S), thus stealthy (not as obvious as a fake BS).
+Only downlink affected, thus undetected by the base station.
+Challenges: time+frequency synchronisation with the legitimate signal, distance/delay estimation to the UE, phone may quickly reconnect to another cell.
+
 
 \paragraph{Adaptive Overshadowing (AdaptOver)} \mbox{} \\
 \underline{Idea:}
@@ -563,4 +569,4 @@ operator's public key, stricter policies for changing temporary ids).
 
 \textbf{What capabilities does an adversary need to perform location tracking on a 4G network?} He needs to get a hold of the IMSI of the UE. This can be done overshadowing a legitimate message after a service or attach request with a Identity Request message, to which the UE will happily reply with its IMSI. Or, the attacker could use two passive base stations to record the propagation delay and use triangulation to calculate the origin of the signal.
 
-\textbf{Describe the security requirements (Authentication, Encryption and Integrity) for the control and user plane in 4G. What does the standard prescribe/rec- ommend? Do the operators follow those recommendations?} MISSING DESCRIPTION. Authentication is required in both the control and user plane, encryption is optional for both but often used, integrity is mandatory for control plane but not user data.
+\textbf{Describe the security requirements (Authentication, Encryption and Integrity) for the control and user plane in 4G. What does the standard prescribe/recommend? Do the operators follow those recommendations?} MISSING DESCRIPTION. Authentication is required in both the control and user plane, encryption is optional for both but often used, integrity is mandatory for control plane but not user data.

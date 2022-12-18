@@ -1,7 +1,20 @@
-\section{Bluetooth Low Energy --- BLE}
+\section{Bluetooth, Classic and Low Energy --- BTC, BLE}
 
 \subsection{Overview}
-Todo
+Bluetooth Classic and Bluetooth Low Energy are similar technologies used for communicating short occasional messages. The former is used, for example, to stream music from a smartphones to wireless headphones; the latter is used with fitness trackers, smart sensors, \dots
+It can communicate over quite a long distance ($\thicksim 100m$).
+\subsubsection{Physical Layer}
+Bluetooth operates in the $2.4GHz$ band, spanning $80MHz$. For the modulation, it uses Gaussian Frequency Shift Keying (GSFK) and the bit-rate ranges from $125\,{kbps}$ to $2\,Mbps$.
+It uses 40 channels with $2\,MHz$ spacing, with $3$ advertising channels and $37$ data channels.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/11-ble-comm-band.png}
+	\caption{BLE Communication Band}
+	\label{fig:why-tracing}
+\end{figure}
+
+In order to mitigate potential jamming and interferences, BLE uses frequency hopping, where each packet is transmitted over a new channel and whose schedule is negotiated during connection establishment.
 
 \subsection{Digital Contact Tracing}
 
