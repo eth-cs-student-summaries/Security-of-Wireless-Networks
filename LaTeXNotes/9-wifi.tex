@@ -208,7 +208,7 @@ Several implementation flaws can be abused to easily inject frames into a protec
 
 How can the adversary construct unencrypted Wi-Fi frames so they are accepted by a vulnerable device? First, certain Wi-Fi devices accept any unencrypted frame even when connected to a protected Wi-Fi network.
 
-Additionally, certain devices accept plaintext aggregated frames that look like handshake messages. An adversary can exploit this by sending an aggregated frame whose starts resembles a handshake message and whose second subframe contains the packet that the adversary wants to inject. A vulnerable device will first interpret this frame as a handshake message, but will subsequently process it as an aggregated frame. In a sense, one part of the code will think the frame is a handshake message and will accept it even though it's not encrypted. Another part of the code will instead see it as an aggregated frame and will process the packet that the adversary wants to inject.
+Additionally, \hl{certain devices accept plaintext aggregated frames that look like handshake messages}. An adversary can exploit this by sending an aggregated frame whose starts resembles a handshake message and whose second subframe contains the packet that the adversary wants to inject. A vulnerable device will first interpret this frame as a handshake message, but will subsequently process it as an aggregated frame. In a sense, one part of the code will think the frame is a handshake message and will accept it even though it's not encrypted. Another part of the code will instead see it as an aggregated frame and will process the packet that the adversary wants to inject.
 
 \textbf{Design flaw: aggregation attack}
 

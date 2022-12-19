@@ -68,7 +68,7 @@ As the attacker needs to advance the payload as well, he needs to guess and send
 
 \paragraph{Distance Bounding}
 A prover who wants to prove its position should quickly receive $N_V$, compute $Ff(N_V,N_P)$ and send it.
-The verifier estimates prover's processing time $=t_p$. If the attacker's processing time is $0$, then he can cheat by $t_p/2$. Thus, ideally, $t_p=0s$; usually, though, $t_p=1-2ns$ which means that the attacker can only shorten the distance by $15-30cm$.
+The verifier estimates prover's processing time $=t_p$. \hl{If the attacker's processing time is $0$, then he can cheat by $t_p/2$}. Thus, ideally, $t_p=0s$; usually, though, $t_p=1-2ns$ which means that the attacker can only shorten the distance by $15-30cm$.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{images/5-dist-bounding.png}
@@ -78,7 +78,7 @@ The verifier estimates prover's processing time $=t_p$. If the attacker's proces
 An evolution of this is Challenge reflection with Channel Selection, where the prover only needs to reflect $N_V$ and the verifier does all the work. This reduces $t_p$ to $0$.
 
 \paragraph{Physical Layer: Representing bits as pulses (UWB)}
-There are two design options to represent a bit: either with a single strong pulse or a sequence of weaker pulses.
+There are two design options to represent a bit: either with a \textbf{single strong pulse} or a \textbf{sequence of weaker pulses}.
 Single pulses may not be detected reliably (distance, interference), so the aggregate over several pulses is the preferred representation.
 
 \begin{figure}[h]
@@ -161,7 +161,7 @@ Security not formally proven and unclear!
 \end{table}
 
 
-In HRP, receivers cannot decode individual pulses. Instead, they need to find the maximum autocorrelation peak (which is not the correct ToA) and then look for the Early Path (leading edge/correct ToA)
+In HRP, receivers cannot decode individual pulses. Instead, they first need to find the maximum autocorrelation peak (which is not the correct ToA) and then look for the Early Path (leading edge/correct ToA)
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.3]{images/5-early-peak.png}
