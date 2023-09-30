@@ -10,3 +10,11 @@
 
 # Other
 .directory
+
+.DS_Store
+
+*.fdb_latexmk
+
+*.fls
+
+*.json
